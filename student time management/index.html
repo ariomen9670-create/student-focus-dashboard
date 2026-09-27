@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Student Focus Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="app">
+  <header class="header">
+    <div class="logo">
+      <span class="logo-icon">◈</span>
+      <h1>Student Focus</h1>
+      <button class="icon-btn" id="soundToggle" title="Toggle sound">🔊</button>
+    </div>
+    <p class="tagline">Stay focused. Build momentum. Own your day.</p>
+  </header>
+
+  <main class="dashboard">
+    <section class="card timer-card">
+      <div class="card-header">
+        <h2>Focus Timer</h2>
+        <div class="session-type" id="sessionType">Focus</div>
+      </div>
+
+      <div class="duration-picker" id="durationPicker">
+        <button class="dur-btn active" data-min="25">25m</button>
+        <button class="dur-btn" data-min="45">45m</button>
+        <button class="dur-btn" data-min="50">50m</button>
+      </div>
+
+      <div class="timer-container">
+        <svg class="progress-ring" width="240" height="240" viewBox="0 0 240 240">
+          <circle class="progress-ring-bg" cx="120" cy="120" r="108" />
+          <circle class="progress-ring-circle" id="progressCircle" cx="120" cy="120" r="108" />
+        </svg>
+        <div class="timer-display">
+          <span id="timeDisplay">25:00</span>
+          <span class="session-count" id="sessionCount">Session 1 of 4</span>
+        </div>
+      </div>
+
+      <div class="timer-controls">
+        <button class="btn btn-primary" id="startPauseBtn">Start</button>
+        <button class="btn btn-secondary" id="resetBtn">Reset</button>
+      </div>
+
+      <p class="today-stat" id="todayStat">0 min focused today</p>
+      <p class="kbd-hint">Press <kbd>Space</kbd> to start/pause</p>
+    </section>
+
+    <div class="side-column">
+      <section class="card streak-card">
+        <div class="card-header"><h2>Study Streak</h2></div>
+        <div class="streak-content">
+          <div class="flame" id="flame">🔥</div>
+          <div class="streak-info">
+            <span class="streak-number" id="streakCount">0</span>
+            <span class="streak-label">day streak</span>
+          </div>
+        </div>
+        <p class="streak-hint" id="streakHint">Complete a focus session today to start your streak</p>
+      </section>
+
+      <section class="card distraction-card">
+        <div class="card-header"><h2>Distraction Log</h2></div>
+        <button class="btn btn-distraction" id="distractBtn"><span>I got distracted</span></button>
+        <div class="distraction-stats">
+          <span class="distract-count" id="distractCount">0</span>
+          <span class="distract-label">distractions today</span>
+        </div>
+        <p class="distract-message" id="distractMessage"></p>
+      </section>
+    </div>
+
+    <section class="card tasks-card">
+      <div class="card-header">
+        <h2>Daily Tasks</h2>
+        <div class="task-stats"><span id="completedCount">0</span> done · <span id="pendingCount">0</span> left</div>
+      </div>
+
+      <form class="task-form" id="taskForm">
+        <input type="text" id="taskInput" placeholder="Add a study task..." autocomplete="off" maxlength="120" />
+        <button type="submit" class="btn btn-add" aria-label="Add task">+</button>
+      </form>
+
+      <ul class="task-list" id="taskList"></ul>
+      <p class="empty-state" id="emptyState">No tasks yet. Add one above to get started.</p>
+    </section>
+  </main>
+
+  <footer class="footer"><p>Data saved locally · No accounts required</p></footer>
+</div>
+
+<audio id="sessionEndSound" preload="auto">
+  <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBTGH0fPTgjMGHm7A7+OZURE=" type="audio/wav" />
+</audio>
+
+<script src="script.js"></script>
+</body>
+</html>
