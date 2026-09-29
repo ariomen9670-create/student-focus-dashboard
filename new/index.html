@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus & Play Hub</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- MAIN MENU -->
+    <div id="main-menu" class="screen fade-in">
+        <h1 class="hero-title">Focus & Play Hub</h1>
+        <div class="cards-container">
+            <div class="card" onclick="openScreen('focus-mode')">
+                <div class="card-icon">⏱️</div>
+                <h3>Focus Mode</h3>
+                <p>Clean productivity timer to help you concentrate and get things done.</p>
+            </div>
+            <div class="card" onclick="openScreen('game-mode'); initGame();">
+                <div class="card-icon">🚀</div>
+                <h3>Spaceship Game</h3>
+                <p>Take a break! Destroy asteroids and enemies in this arcade space shooter.</p>
+            </div>
+            <div class="card" onclick="openScreen('search-mode')">
+                <div class="card-icon">🔍</div>
+                <h3>Smart Search</h3>
+                <p>Intelligent web search with smart query detection and quick suggestions.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOCUS MODE -->
+    <div id="focus-mode" class="screen hidden">
+        <button class="btn btn-outline back-btn" onclick="openScreen('main-menu')">← Back to Menu</button>
+        
+        <div class="timer-container">
+            <svg class="progress-ring" width="280" height="280">
+                <circle class="progress-ring__circle-bg" stroke-width="12" fill="transparent" r="130" cx="140" cy="140"/>
+                <circle class="progress-ring__circle" stroke-width="12" fill="transparent" r="130" cx="140" cy="140"/>
+            </svg>
+            <div class="time-display" id="time-display">25:00</div>
+        </div>
+
+        <div class="timer-controls">
+            <button class="btn" id="start-btn" onclick="toggleTimer()">Start</button>
+            <button class="btn btn-outline" onclick="resetTimer()">Reset</button>
+        </div>
+        
+        <div style="display: flex; gap: 10px; align-items: center; margin-top: 10px;">
+            <label for="custom-time" style="color: var(--text-muted);">Set Minutes:</label>
+            <input type="number" id="custom-time" class="custom-time-input" value="25" min="1" max="120" onchange="resetTimer()">
+        </div>
+    </div>
+
+    <!-- SPACESHIP GAME -->
+    <div id="game-mode" class="screen hidden">
+        <button class="btn btn-outline back-btn" onclick="openScreen('main-menu'); stopGame();">← Back</button>
+        
+        <div class="game-ui">
+            <div>Score: <span id="score">0</span></div>
+            <div class="lives" id="lives">❤️❤️❤️</div>
+        </div>
+
+        <canvas id="gameCanvas"></canvas>
+
+        <div id="game-over" class="game-over-modal hidden">
+            <h2>Game Over!</h2>
+            <p>Your Final Score: <span id="final-score">0</span></p>
+            <button class="btn" onclick="initGame()">Play Again</button>
+        </div>
+    </div>
+
+    <!-- SMART SEARCH -->
+    <div id="search-mode" class="screen hidden">
+        <button class="btn btn-outline back-btn" onclick="openScreen('main-menu')">← Back to Menu</button>
+        
+        <div class="search-container">
+            <h2>Smart Search</h2>
+            <p style="color: var(--text-muted); margin-bottom: 25px; margin-top: 5px;">Find exactly what you need, instantly.</p>
+            
+            <div class="search-box">
+                <input type="text" id="search-input" class="search-input" placeholder="Type anything... e.g. tea kaise banti hai" onkeypress="handleSearchKey(event)">
+                <button class="btn search-btn" onclick="performSearch()">Search</button>
+            </div>
+
+            <div class="chips-container">
+                <div class="chip" onclick="setSearch('Tea recipe')">Tea recipe</div>
+                <div class="chip" onclick="setSearch('Coffee kaise banaye')">Coffee kaise banaye</div>
+                <div class="chip" onclick="setSearch('Pasta recipe')">Pasta recipe</div>
+                <div class="chip" onclick="setSearch('How to make pizza')">How to make pizza</div>
+            </div>
+
+            <!-- Loading UI -->
+            <div id="search-loading" class="loading-overlay hidden">
+                <div class="spinner"></div>
+                <h3>Processing Smart Query...</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link to external JS file -->
+    <script src="script.js"></script>
+</body>
+</html>
